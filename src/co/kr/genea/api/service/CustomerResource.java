@@ -29,12 +29,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Path("/customers")
-public class CustomerResource {
+public class CustomerResource
+{
    private Map<Integer, Customer> customerDB = new ConcurrentHashMap<Integer, Customer>();
    private AtomicInteger idCounter = new AtomicInteger();
 
-   public CustomerResource() {
-   }
+   public CustomerResource() {}
 
    @POST
    @Consumes("application/xml")
@@ -81,7 +81,8 @@ public class CustomerResource {
    }
 
 
-   protected void outputCustomer(OutputStream os, Customer cust) throws IOException {
+   protected void outputCustomer(OutputStream os, Customer cust) throws IOException 
+   {
       PrintStream writer = new PrintStream(os);
       writer.println("<customer id=\"" + cust.getId() + "\">");
       writer.println("   <first-name>" + cust.getFirstName() + "</first-name>");
@@ -94,7 +95,8 @@ public class CustomerResource {
       writer.println("</customer>");
    }
 
-   protected Customer readCustomer(InputStream is) {
+   protected Customer readCustomer(InputStream is) 
+   {
       try {
          DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
          Document doc = builder.parse(is);
@@ -129,7 +131,8 @@ public class CustomerResource {
          }
          return cust;
       }
-      catch (Exception e) {
+      catch (Exception e) 
+      {
          throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
       }
    }
